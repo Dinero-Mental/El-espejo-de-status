@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Espejo de Estatus | Dinero Mental</title>
+<style>
+:root{
+  --navy:#0D1B2A; --card:#13263A; --card2:#1B344B; --text:#F5F0E8;
+  --amber:#F5A623; --red:#E8001D; --muted:#AAB8C5; --border:#294259;
+  --green:#4CAF50; --blue:#4DA3FF;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5}
+.container{max-width:900px;margin:auto;padding:24px 18px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:35px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+.glasses{position:relative;width:44px;height:22px}
+.glasses:before,.glasses:after{content:"";position:absolute;top:2px;width:16px;height:12px;border:4px solid var(--red);border-radius:4px}
+.glasses:before{left:0}.glasses:after{right:0}
+.glasses i{position:absolute;left:17px;top:7px;width:10px;height:4px;background:var(--red)}
+.yt{color:var(--text);text-decoration:none;border:1px solid var(--border);padding:8px 12px;border-radius:9px;font-size:13px}
+h1{font-size:clamp(34px,7vw,58px);line-height:1.02;margin:0 0 12px}
+.subtitle{font-size:18px;color:var(--muted);max-width:720px;margin-bottom:30px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 12px 35px rgba(0,0,0,.15)}
+.card h2{margin:0 0 8px;font-size:21px}
+.kicker{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);font-weight:800}
+label{display:block;font-weight:700;margin:18px 0 7px}
+input{width:100%;padding:14px;border-radius:10px;border:1px solid var(--border);background:#0d1f31;color:var(--text);font-size:16px;outline:none}
+input:focus{border-color:var(--amber)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{border:0;border-radius:11px;padding:13px 16px;font-weight:800;cursor:pointer;font-size:15px}
+.primary{background:var(--amber);color:#101820;width:100%;margin-top:22px}
+.secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
+.question{padding:20px 0;border-top:1px solid var(--border)}
+.question:first-of-type{border-top:0}
+.qnum{color:var(--amber);font-weight:900;font-size:13px}
+.qtitle{font-size:18px;font-weight:800;margin:5px 0 7px}
+.qhelp{color:var(--muted);font-size:14px;margin:0 0 14px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.answer{background:var(--card2);color:var(--text);border:1px solid var(--border)}
+.answer.selected{border-color:var(--amber);box-shadow:inset 0 0 0 1px var(--amber)}
+.hidden{display:none}
+.progress{height:8px;background:#0b1826;border-radius:10px;overflow:hidden;margin:12px 0 24px}
+.progress span{display:block;height:100%;background:var(--amber);width:0;transition:.3s}
+.result-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.verdict{font-size:28px;font-weight:900;line-height:1.1;margin:8px 0}
+.score{font-size:46px;font-weight:900;color:var(--amber);white-space:nowrap}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.badge{border:1px solid var(--border);padding:7px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:var(--card2);border-radius:12px;padding:15px}
+.metric small{display:block;color:var(--muted);font-size:12px}.metric strong{display:block;font-size:22px;margin-top:4px}
+.bar{height:9px;background:#0b1826;border-radius:10px;overflow:hidden;margin:8px 0 14px}
+.bar i{display:block;height:100%;background:var(--amber)}
+.advice{border-left:4px solid var(--amber);padding:13px 15px;background:#172c40;border-radius:0 10px 10px 0}
+.good{border-left-color:var(--green)} .danger{border-left-color:var(--red)}
+.small{font-size:13px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+@media(max-width:650px){.grid,.answers,.metrics{grid-template-columns:1fr}.result-head{display:block}.score{margin-top:10px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="brand"><div class="glasses"><i></i></div> DINERO MENTAL</div>
+  <a class="yt" href="https://www.youtube.com/@Dinero_Mental?sub_confirmation=1" target="_blank" rel="noopener noreferrer">Suscríbete ↗</a>
+</header>
+
+<section>
+  <div class="kicker">Herramienta de psicología del dinero</div>
+  <h1>El Espejo de Estatus</h1>
+  <p class="subtitle">Un interrogatorio en frío antes de pagar. Descubre si quieres el producto… o lo que ese producto dice de ti.</p>
+</section>
+
+<section id="setup" class="card">
+  <h2>Antes de comprar</h2>
+  <p class="small">Introduce la compra que estás pensando hacer. No hay respuestas buenas o malas.</p>
+  <label for="item">¿Qué quieres comprar?</label>
+  <input id="item" placeholder="Ej.: móvil, reloj, coche, zapatillas..." maxlength="80">
+  <div class="grid">
+    <div>
+      <label for="price">Precio (€)</label>
+      <input id="price" type="number" min="0" step="0.01" placeholder="800">
+    </div>
+    <div>
+      <label for="salary">Ingreso neto mensual (€)</label>
+      <input id="salary" type="number" min="0" step="1" value="1600">
+    </div>
+  </div>
+  <button class="primary" onclick="start()">Iniciar auditoría del deseo →</button>
+</section>
+
+<section id="audit" class="card hidden">
+  <div class="kicker">Interrogatorio en frío</div>
+  <h2>Contesta sin justificarte</h2>
+  <div class="progress"><span id="progress"></span></div>
+  <div id="questions"></div>
+  <button id="calc" class="primary" onclick="calculate()" disabled>Ver mi diagnóstico</button>
+</section>
+
+<section id="result" class="card hidden"></section>
+
+<footer>Dinero Mental · Mejora tu mente y mejora tu dinero</footer>
+</div>
+
+<script>
+const questions=[
+ {title:"El producto desnudo",help:"Imagina exactamente la misma calidad, materiales y duración, pero sin logo, marca ni diseño reconocible.",a:"Lo compraría igualmente",b:"Me interesa bastante menos",bias:"Estatus"},
+ {title:"El público",help:"Piensa en las próximas dos semanas. ¿Te importa que alguien concreto te vea usándolo?",a:"No, lo quiero para mí",b:"Sí, quiero que se vea",bias:"Validación social"},
+ {title:"El testigo invisible",help:"Si nadie en el mundo pudiera saber jamás que lo tienes, ¿seguirías pagando ese precio?",a:"Sí",b:"No / probablemente no",bias:"Señalización"},
+ {title:"El efecto escaparate",help:"¿Has pensado en esta compra después de verla en redes, publicidad, un compañero o alguien a quien admiras?",a:"No / apenas",b:"Sí, claramente",bias:"Comparación social"},
+ {title:"El FOMO",help:"Si no lo compras hoy, ¿sientes que perderás una oportunidad especial?",a:"No, seguirá estando ahí",b:"Sí, tengo que decidir ya",bias:"FOMO / escasez"},
+ {title:"La emoción",help:"Si mañana tuvieras un día horrible, ¿te apetecería más comprarlo que hoy?",a:"No cambia",b:"Sí, me serviría para sentirme mejor",bias:"Recompensa inmediata"},
+ {title:"La prueba de identidad",help:"¿La compra encaja con algo que ya forma parte de tu vida o intenta convertirte en alguien que todavía no eres?",a:"Encaja con mi vida actual",b:"Representa la persona que quiero parecer",bias:"Identidad aspiracional"},
+ {title:"El coste de oportunidad",help:"Si ese dinero desapareciera hoy de tu cuenta, ¿qué otra cosa importante dejarías de poder hacer?",a:"Prácticamente nada",b:"Sí, afectaría a otra prioridad",bias:"Coste de oportunidad"}
+];
+let answers=[], item="", price=0, salary=0;
+
+function start(){
+ item=document.getElementById("item").value.trim()||"esta compra";
+ price=parseFloat(document.getElementById("price").value);
+ salary=parseFloat(document.getElementById("salary").value);
+ if(!price||price<=0||!salary||salary<=0){alert("Introduce un precio y unos ingresos mensuales válidos.");return}
+ answers=[];
+ document.getElementById("setup").classList.add("hidden");
+ document.getElementById("audit").classList.remove("hidden");
+ renderQuestions();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderQuestions(){
+ const box=document.getElementById("questions");
+ box.innerHTML="";
+ questions.forEach((q,i)=>{
+   const d=document.createElement("div"); d.className="question";
+   d.innerHTML=`<div class="qnum">0${i+1} / ${questions.length}</div>
+   <div class="qtitle">${q.title}</div><p class="qhelp">${q.help}</p>
+   <div class="answers">
+     <button class="answer" onclick="answer(${i},0,this)">${q.a}</button>
+     <button class="answer" onclick="answer(${i},1,this)">${q.b}</button>
+   </div>`;
+   box.appendChild(d);
+ });
+ updateProgress();
+}
+function answer(i,val,el){
+ answers[i]=val;
+ [...el.parentNode.children].forEach(x=>x.classList.remove("selected"));
+ el.classList.add("selected");
+ updateProgress();
+}
+function updateProgress(){
+ const n=answers.filter(x=>x!==undefined).length;
+ document.getElementById("progress").style.width=(n/questions.length*100)+"%";
+ document.getElementById("calc").disabled=n<questions.length;
+}
+function calculate(){
+ const status=[0,1,2,3,4,6].reduce((s,i)=>s+(answers[i]||0),0);
+ const stress=(answers[5]||0);
+ const opportunity=(answers[7]||0);
+ const statusPct=Math.round(status/6*100);
+ const workHours=price/(salary/140);
+ const salaryPct=Math.round(price/salary*100);
+ const biases=questions.filter((q,i)=>answers[i]===1).map(q=>q.bias);
+ let verdict, cls, advice;
+ if(statusPct>=67 || (statusPct>=50 && opportunity===1)){
+   verdict="Probablemente no estás comprando solo el producto.";
+   cls="danger";
+   advice="<strong>Bloqueo de 72 horas.</strong> Cierra la pestaña, no sigas mirando alternativas y vuelve a responder al test dentro de tres días. Si entonces sigue teniendo sentido, vuelve a valorar la compra.";
+ }else if(opportunity===1 || salaryPct>=25){
+   verdict="Deseo legítimo, pero con coste psicológico.";
+   cls="";
+   advice="<strong>Frena.</strong> La compra puede gustarte de verdad, pero pesa sobre otra prioridad. Decide qué prefieres sacrificar antes de pagar.";
+ }else{
+   verdict="La compra parece tener utilidad real.";
+   cls="good";
+   advice="<strong>Luz verde con una condición:</strong> que puedas pagarla sin romper tu colchón, tus obligaciones ni la tranquilidad de los próximos meses.";
+ }
+ const unique=[...new Set(biases)];
+ document.getElementById("audit").classList.add("hidden");
+ const r=document.getElementById("result");
+ r.classList.remove("hidden");
+ r.innerHTML=`
+   <div class="result-head"><div>
+     <div class="kicker">Tu diagnóstico</div>
+     <div class="verdict">${verdict}</div>
+     <p class="small"><strong>${escapeHtml(item)}</strong> · ${price.toLocaleString('es-ES',{style:'currency',currency:'EUR'})}</p>
+   </div><div class="score">${statusPct}<small style="font-size:14px;color:var(--muted)"> / 100 estatus</small></div></div>
+   <div class="metrics">
+     <div class="metric"><small>Horas de trabajo</small><strong>${workHours.toFixed(1)} h</strong></div>
+     <div class="metric"><small>Precio / sueldo</small><strong>${salaryPct}%</strong></div>
+     <div class="metric"><small>Señales detectadas</small><strong>${unique.length}</strong></div>
+   </div>
+   <p><strong>Índice de estatus</strong></p><div class="bar"><i style="width:${statusPct}%"></i></div>
+   <div class="badges">${unique.length?unique.map(x=>`<span class="badge">⚠ ${x}</span>`).join(""):'<span class="badge">✓ Sin sesgo dominante detectado</span>'}</div>
+   <div class="advice ${cls}">${advice}</div>
+   <h3 style="margin-top:25px">La pregunta que importa</h3>
+   <p>Si mañana nadie pudiera saber que has comprado <strong>${escapeHtml(item)}</strong>, ¿seguirías sintiendo que ha merecido la pena entregar ${price.toLocaleString('es-ES',{style:'currency',currency:'EUR'})}?</p>
+   <p class="small">Este diagnóstico no decide por ti. Su función es hacer visible el motivo de la compra antes de que pagues.</p>
+   <button class="secondary" onclick="reset()">← Auditar otra compra</button>
+ `;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function reset(){
+ document.getElementById("result").classList.add("hidden");
+ document.getElementById("setup").classList.remove("hidden");
+ document.getElementById("audit").classList.add("hidden");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+</script>
+</body>
+</html>
